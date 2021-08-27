@@ -1,47 +1,53 @@
 import "./SignUpForm.css";
 import {useState} from "react";
 import {LoginService} from "../services/LoginService";
-import {SingInModel} from "../models/SingInModel";
+import {defaultSingInData, SingInModel, SingInModelErrors, validateSingInModel} from "../models/SingInModel";
 import {TextInput} from "./common/TextInput";
 import {CountrySelect} from "./CountrySelect";
 import {PhoneInput} from "./common/PhoneInput";
 import {CountriesData} from "../models/CountriesData";
-const emailPattern = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+import {PasswordInput} from "./common/PasswordInput";
+import {NormalButton} from "./common/NormalButton";
+import {useHistory} from "react-router-dom";
 
-interface SignUpFormProps {
-}
 
-export function SignUpForm(props: SignUpFormProps) {
-    const [formData, setFormData] = useState<SingInModel>({} as SingInModel);
-    const [emailError, setEmailError] = useState<string>();
+export function SignUpForm() {
+    const [formData, setFormData] = useState<SingInModel>(defaultSingInData);
+    const [errors, setErrors] = useState<SingInModelErrors>({});
+    let history = useHistory();
     const phoneCode = CountriesData.find(c => c.id == formData.country)?.phoneCode;
+    const isSomeErrors = Object.keys(errors).length != 0;
 
-    const onChangeData = (field, val) => {setFormData(data => ({...data, [field]: val}))};
+    const onChangeData = (field: keyof SingInModel, val) => {
+        setFormData(data => ({...data, [field]: val}))
+        setErrors(e => Object.fromEntries(Object.entries(e).filter(o => o[0] != field)))
+    };
 
-    const validateEmail = () => {
-        if (!emailPattern.test(formData.email))
-            setEmailError("Wrong email format");
-    }
-
-    const setEmail = (val: string) => {
-        onChangeData("email", val);
-        setEmailError(null);
-    }
+    const validate = () => setErrors(validateSingInModel(formData))
 
     const send = () => {
-        LoginService.singIn(formData)
+        if (!isSomeErrors)
+            LoginService.singIn(formData)
+                .then(() => history.push('/signin'));
     }
+
     return <div className="sing-up-form">
         <div className="header">Sign Up</div>
         <div className="inputs-in-line">
-            <TextInput title="First name" value={formData.name} onChange={val => onChangeData("name", val)}/>
-            <TextInput title="Last name" value={formData.lastName} onChange={val => onChangeData("lastName", val)}/>
+            <TextInput title="First name" value={formData.name} onChange={val => onChangeData("name", val)}
+                       onBlur={validate} error={errors.name}/>
+            <TextInput title="Last name" value={formData.lastName} onChange={val => onChangeData("lastName", val)}
+                       onBlur={validate} error={errors.lastName}/>
         </div>
-        <TextInput title="Email" value={formData.email} onChange={setEmail} onBlur={validateEmail} error={emailError}/>
+        <TextInput title="Email" value={formData.email} onChange={val => onChangeData("email", val)}
+                   onBlur={validate} error={errors.email}/>
         <div className="inputs-in-line">
             <CountrySelect title="Country" value={formData.country} onChange={val => onChangeData("country", val)}/>
-            <PhoneInput title="Phone number" phoneCode={phoneCode} value={formData.phone} onChange={val => onChangeData("phone", val)}/>
+            <PhoneInput title="Phone number" phoneCode={phoneCode} value={formData.phone} onChange={val => onChangeData("phone", val)}
+                        onBlur={validate} error={errors.phone}/>
         </div>
-
+        <PasswordInput title="Password" value={formData.password} onChange={val => onChangeData("password", val)}
+                       onBlur={validate} error={errors.password}/>
+        <NormalButton title="Continue" disable={isSomeErrors} onClick={send}/>
     </div>
 }

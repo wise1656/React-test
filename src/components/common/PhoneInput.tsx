@@ -6,10 +6,12 @@ interface PhoneInputProps {
     onChange: (val: string) => void
     phoneCode: string
     title: string
+    onBlur: () => void
+    error?: string
 }
 
 export function PhoneInput(props: PhoneInputProps) {
-    const {value, phoneCode, title} = props;
+    const {value, phoneCode, title, onBlur, error} = props;
 
     const format = val => {
         let formattedString = "(___) ___-__-__";
@@ -21,11 +23,11 @@ export function PhoneInput(props: PhoneInputProps) {
     const deforat = val => val.replaceAll(/\D/g, "")
 
     return <Titled title={title}>
-        <Errorable>
-        <div>
-            <span className="phone-code">+{phoneCode}</span>
-            <input className="phone-text" value={format(value)} onChange={e => deforat(e.target.value)}/>
-        </div>
+        <Errorable error={error}>
+            <div>
+                <span className="phone-code">+{phoneCode}</span>
+                <input className="phone-text" value={format(value)} onChange={e => deforat(e.target.value)} onBlur={onBlur}/>
+            </div>
         </Errorable>
     </Titled>
 }

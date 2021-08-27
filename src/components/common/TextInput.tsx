@@ -6,7 +6,7 @@ interface TextInputProps {
     title: string
     value: string
     onChange: (newVal: string) => void
-    onBlur?: () => void
+    onBlur: () => void
     error?: string
 }
 

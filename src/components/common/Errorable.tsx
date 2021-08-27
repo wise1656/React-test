@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface ErrorableProps {
-    error?: string
+    error: string | null
     children: (JSX.Element | JSX.Element[])
 }
 
