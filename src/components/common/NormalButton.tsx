@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import "./NormalButton.css";
 
 interface NormalButtonProps {
     title: string

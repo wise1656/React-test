@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Titled.css";
 
 interface TitledProps {
     title: string

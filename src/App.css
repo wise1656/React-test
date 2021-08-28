@@ -1,7 +1,14 @@
 .App {
+  display: flex;
   width: 830px;
-  color: #404040;
+  height: 800px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: relative;
+
   font-family: Ubuntu;
+  color: #404040;
 }
 
 .header {
@@ -16,9 +23,23 @@
   color: #AFAFAF;
 }
 
-.input {
+input, select {
   background: #FFFFFF;
   border: 1px solid #DBDBDB;
   box-sizing: border-box;
   border-radius: 4px;
+  padding: 8px 12px;
+  color: #404040;
+}
+
+.inputs-in-line {
+  display: flex;
+}
+
+.inputs-in-line > * {
+  flex: 1;
+}
+
+.inputs-in-line > *:not(:last-child) {
+  margin-right: 20px;
 }

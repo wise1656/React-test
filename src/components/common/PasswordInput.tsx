@@ -2,6 +2,8 @@ import {Errorable} from "./Errorable";
 import {Titled} from "./Titled";
 import * as React from "react";
 import {useState} from "react";
+import "./PasswordInput.css"
+import cn from "classnames";
 
 interface PasswordInputProps {
     title: string
@@ -17,10 +19,12 @@ export function PasswordInput(props: PasswordInputProps) {
 
     return <Titled title={title}>
         <Errorable error={error}>
-            <input className="input" value={value} type={showPass ? "text" : "password"}
-                   onChange={e => onChange(e.target.value)} onBlur={onBlur}/>
-            <img className="show-password" src={showPass ? "passport_show.svg" : "/passport_hide.svg"} alt=""
-                 onClick={() => setShowPass(v => !v)}/>
+            <div className="password-input-container">
+                <input className="input" value={value} type={showPass ? "text" : "password"}
+                       onChange={e => onChange(e.target.value)} onBlur={onBlur} autoComplete="new-password"/>
+                <img className={cn("show-password", {"shown": showPass})} src={showPass ? "/passport_show.svg" : "/passport_hide.svg"} alt=""
+                     onClick={() => setShowPass(v => !v)}/>
+            </div>
         </Errorable>
     </Titled>
 }

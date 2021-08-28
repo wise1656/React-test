@@ -1,0 +1,16 @@
+.country-select-container {
+    display: flex;
+    position: relative;
+}
+
+select.country-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.country-select-container .arrow {
+    position: absolute;
+    right: 14px;
+    top: 13px;
+    pointer-events: none;
+}

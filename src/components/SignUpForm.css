@@ -1,0 +1,23 @@
+.sing-up-form {
+    width: 540px;
+}
+
+.sing-up-form .header {
+    margin-bottom: 40px;
+}
+
+.sing-up-form > * {
+    margin-bottom: 32px;
+}
+
+.sing-up-form input.input,
+.sing-up-form .country-select,
+.sing-up-form .phone-text {
+    flex: 1;
+}
+
+.sing-up-form .normal-button {
+    margin-top: 8px;
+}
+
+

@@ -1,0 +1,16 @@
+.normal-button {
+    background: #4E42E4;
+    border-radius: 4px;
+    padding: 8px 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FFFFFF;
+    width: fit-content;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.normal-button.disabled {
+    background-color: #DBDBDB;
+}

@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Errorable.css";
 
 interface ErrorableProps {
     error: string | null

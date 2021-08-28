@@ -1,0 +1,12 @@
+.errorable {
+    display: flex;
+    position: relative;
+}
+
+.errorable .input-error {
+    color: red;
+    position: absolute;
+    height: 0;
+    bottom: -8px;
+    font-size: 12px;
+}
