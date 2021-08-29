@@ -24,3 +24,7 @@
 .phone-input-container input.phone-text:focus-visible {
     border: none;
 }
+
+.errorable.error .phone-input-container {
+    border-color: #F54747;
+}

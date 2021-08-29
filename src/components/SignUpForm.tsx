@@ -1,7 +1,7 @@
-import "./SignUpForm.css";
+import "./Form.css";
 import {useState} from "react";
 import {LoginService} from "../services/LoginService";
-import {defaultSingInData, SingInModel, SingInModelErrors, validateSingInModel} from "../models/SingInModel";
+import {defaultSingInData, SingUpModel, SingUpModelErrors, validateSingUpModel} from "../models/SingUpModel";
 import {TextInput} from "./common/TextInput";
 import {CountrySelect} from "./CountrySelect";
 import {PhoneInput} from "./common/PhoneInput";
@@ -13,19 +13,22 @@ import {SignInLink} from "./SignInLink";
 
 
 export function SignUpForm() {
-    const [formData, setFormData] = useState<SingInModel>(defaultSingInData);
-    const [errors, setErrors] = useState<SingInModelErrors>({});
+    const [formData, setFormData] = useState<SingUpModel>(defaultSingInData);
+    const [errors, setErrors] = useState<SingUpModelErrors>({});
+    const [isSomeErrors, setIsSomeErrors] = useState(true);
     let history = useHistory();
     const phoneCode = CountriesData.find(c => c.id === formData.country)?.phoneCode;
-    const isSomeErrors = Object.keys(errors).length !== 0;
 
-    const onChangeData = (field: keyof SingInModel, val) => {
+    const onChangeData = (field: keyof SingUpModel, val) => {
         setFormData(data => ({...data, [field]: val}))
         setErrors(e => Object.fromEntries(Object.entries(e).filter(o => o[0] !== field)))
     };
 
-    const validate = (field: keyof SingInModel) =>
-        setErrors(e => ({...e, [field]: validateSingInModel(formData)[field]}));
+    const validate = (field: keyof SingUpModel) => {
+        const err = validateSingUpModel(formData);
+        setErrors(e => ({...e, [field]: err[field]}));
+        setIsSomeErrors(Object.keys(err).length !== 0);
+    };
 
     const send = () => {
         if (!isSomeErrors)
@@ -33,7 +36,7 @@ export function SignUpForm() {
                 .then(() => history.push('/signin'));
     }
 
-    return <div className="sing-up-form">
+    return <div className="form">
         <div className="header">Sign Up</div>
         <div className="inputs-in-line">
             <TextInput title="First name" value={formData.name} onChange={val => onChangeData("name", val)}

@@ -1,0 +1,23 @@
+.form {
+    width: 540px;
+}
+
+.form .header {
+    margin-bottom: 40px;
+}
+
+.form > * {
+    margin-bottom: 32px;
+}
+
+.form input.input,
+.form .country-select,
+.form .phone-text {
+    flex: 1;
+}
+
+.form .normal-button {
+    margin-top: 8px;
+}
+
+

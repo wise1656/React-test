@@ -32,7 +32,7 @@ export function PhoneInput(props: PhoneInputProps) {
         return formattedString;
     }
 
-    const deformat = val => onChange(val.replaceAll(/\D/g, ""));
+    const deformat = val => onChange(val.replaceAll(/\D/g, "").substring(0, 10));
 
     const formattedValue = format(value);
 

@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Switch>
-                    <Route path={'/'}>
+                    <Route exact path="/">
                         <SignUpForm/>
                     </Route>
                     <Route path={'/signin'}>

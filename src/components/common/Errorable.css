@@ -10,3 +10,9 @@
     bottom: -8px;
     font-size: 12px;
 }
+
+.errorable.error input.input,
+.errorable.error .country-select,
+.errorable.error .phone-text {
+    border-color: #F54747;
+}
