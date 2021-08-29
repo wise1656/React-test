@@ -10,12 +10,14 @@ import {PasswordInput} from "./common/PasswordInput";
 import {NormalButton} from "./common/NormalButton";
 import {useHistory} from "react-router-dom";
 import {SignInLink} from "./SignInLink";
+import {Errorable} from "./common/Errorable";
 
 
 export function SignUpForm() {
     const [formData, setFormData] = useState<SingUpModel>(defaultSingInData);
     const [errors, setErrors] = useState<SingUpModelErrors>({});
     const [isSomeErrors, setIsSomeErrors] = useState(true);
+    const [requestError, setRequestError] = useState<string>()
     let history = useHistory();
     const phoneCode = CountriesData.find(c => c.id === formData.country)?.phoneCode;
 
@@ -30,10 +32,14 @@ export function SignUpForm() {
         setIsSomeErrors(Object.keys(err).length !== 0);
     };
 
-    const send = () => {
-        if (!isSomeErrors)
-            LoginService.singIn(formData)
-                .then(() => history.push('/signin'));
+    const send = async () => {
+        if (isSomeErrors) return
+        setRequestError(null);
+        const isOk = await LoginService.singUp(formData);
+        if (isOk)
+            history.push('/');
+        else
+            setRequestError("Some server error");
     }
 
     return <div className="form">
@@ -54,7 +60,9 @@ export function SignUpForm() {
         </div>
         <PasswordInput title="Password" value={formData.password} onChange={val => onChangeData("password", val)}
                        onBlur={() => validate("password")} error={errors.password}/>
-        <NormalButton title="Continue" disable={isSomeErrors} onClick={send}/>
-        <SignInLink text="Already have an account?" linkText="Sign In" url="/signin"/>
+        <Errorable error={requestError}>
+            <NormalButton title="Continue" disable={isSomeErrors} onClick={send}/>
+        </Errorable>
+        <SignInLink text="Already have an account?" linkText="Sign In" url="/"/>
     </div>
 }

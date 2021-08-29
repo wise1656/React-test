@@ -10,10 +10,13 @@ function App() {
             <div className="App">
                 <Switch>
                     <Route exact path="/">
+                        <SignInForm/>
+                    </Route>
+                    <Route path="/signup">
                         <SignUpForm/>
                     </Route>
-                    <Route path={'/signin'}>
-                        <SignInForm/>
+                    <Route path="/welcome">
+                        <div className="welcome">Welcome</div>
                     </Route>
                 </Switch>
             </div>

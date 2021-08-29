@@ -43,3 +43,7 @@ input, select {
 .inputs-in-line > *:not(:last-child) {
   margin-right: 20px;
 }
+
+.welcome {
+  font-size: 50px;
+}
