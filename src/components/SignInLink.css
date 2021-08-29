@@ -4,7 +4,8 @@
     right: 40px;
 }
 
-.signin-link .have-account{
+.signin-link .have-account {
+    font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #AFAFAF;
@@ -17,4 +18,24 @@
     line-height: 24px;
     color: #404040;
     text-decoration: none;
+}
+
+@media screen and (max-width: 830px) {
+    .signin-link {
+        position: unset;
+        display: block;
+        width: 130px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .signin-link .have-account {
+        display: block;
+        margin: 0 0 8px 0;
+    }
+
+    .signin-link a {
+        display: block;
+    }
 }

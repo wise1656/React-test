@@ -40,9 +40,9 @@ export function SignInForm() {
     return <div className="form">
         <div className="header">Sign In</div>
         <TextInput title="Email" value={formData.email} onChange={val => onChangeData("email", val)}
-                   onBlur={() => validate("email")} error={errors.email}/>
+                   onBlur={() => validate("email")} error={errors.email} placeholder="Your company Email"/>
         <PasswordInput title="Password" value={formData.password} onChange={val => onChangeData("password", val)}
-                       onBlur={() => validate("password")} error={errors.password}/>
+                       onBlur={() => validate("password")} error={errors.password} placeholder="Your password"/>
         <Errorable error={requestError}>
             <NormalButton title="Sign In" disable={isSomeErrors} onClick={send}/>
         </Errorable>

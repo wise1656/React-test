@@ -46,12 +46,12 @@ export function SignUpForm() {
         <div className="header">Sign Up</div>
         <div className="inputs-in-line">
             <TextInput title="First name" value={formData.name} onChange={val => onChangeData("name", val)}
-                       onBlur={() => validate("name")} error={errors.name}/>
+                       onBlur={() => validate("name")} error={errors.name} placeholder="Your first name"/>
             <TextInput title="Last name" value={formData.lastName} onChange={val => onChangeData("lastName", val)}
-                       onBlur={() => validate("lastName")} error={errors.lastName}/>
+                       onBlur={() => validate("lastName")} error={errors.lastName} placeholder="Your last name"/>
         </div>
         <TextInput title="Email" value={formData.email} onChange={val => onChangeData("email", val)}
-                   onBlur={() => validate("email")} error={errors.email}/>
+                   onBlur={() => validate("email")} error={errors.email} placeholder="Your company Email"/>
         <div className="inputs-in-line">
             <CountrySelect title="Country" value={formData.country} onChange={val => onChangeData("country", val)}/>
             <PhoneInput title="Phone number" phoneCode={phoneCode} value={formData.phone}
@@ -59,7 +59,7 @@ export function SignUpForm() {
                         onBlur={() => validate("phone")} error={errors.phone}/>
         </div>
         <PasswordInput title="Password" value={formData.password} onChange={val => onChangeData("password", val)}
-                       onBlur={() => validate("password")} error={errors.password}/>
+                       onBlur={() => validate("password")} error={errors.password} placeholder="Your password"/>
         <Errorable error={requestError}>
             <NormalButton title="Continue" disable={isSomeErrors} onClick={send}/>
         </Errorable>

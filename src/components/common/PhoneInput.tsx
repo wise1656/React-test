@@ -15,6 +15,7 @@ interface PhoneInputProps {
 export function PhoneInput(props: PhoneInputProps) {
     const {value, onChange, phoneCode, title, onBlur, error} = props;
     const inputRef = useRef<HTMLInputElement>();
+    const phoneFormat = "(___) ___-__-__";
 
     const setCursorPos = (newVal) => {
         if (!inputRef.current) return;
@@ -25,7 +26,7 @@ export function PhoneInput(props: PhoneInputProps) {
     }
 
     const format = val => {
-        let formattedString = "(___) ___-__-__";
+        let formattedString = phoneFormat;
         for (let c of val)
             formattedString = formattedString.replace("_", c);
         setCursorPos(formattedString);
@@ -34,14 +35,15 @@ export function PhoneInput(props: PhoneInputProps) {
 
     const deformat = val => onChange(val.replaceAll(/\D/g, "").substring(0, 10));
 
-    const formattedValue = format(value);
+    const formattedValue = value && format(value);
 
     return <Titled title={title}>
         <Errorable error={error}>
             <div className="phone-input-container">
                 <span className="phone-code">+{phoneCode}</span>
                 <input className="phone-text" value={formattedValue} onChange={e => deformat(e.target.value)}
-                       onBlur={onBlur} ref={inputRef} autoComplete="nope" onFocus={() => setCursorPos(formattedValue)}/>
+                       onBlur={onBlur} ref={inputRef} autoComplete="nope" onFocus={() => setCursorPos(formattedValue)}
+                       placeholder={phoneFormat}/>
             </div>
         </Errorable>
     </Titled>

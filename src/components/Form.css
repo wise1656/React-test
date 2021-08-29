@@ -20,4 +20,51 @@
     margin-top: 8px;
 }
 
+.form .inputs-in-line {
+    display: flex;
+}
 
+.inputs-in-line > * {
+    flex: 1;
+}
+
+.inputs-in-line > *:not(:last-child) {
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 830px) {
+    .form {
+        width: auto;
+        flex: 1;
+        padding: 40px 20px;
+    }
+
+    .form .header {
+        justify-self: center;
+        text-align: center;
+    }
+
+    .form .header {
+        margin-bottom: 32px;
+    }
+
+    .form > * {
+        margin-bottom: 20px;
+    }
+
+    .form .normal-button {
+        margin-top: 12px;
+    }
+
+    .form .signin-link {
+        margin-top: 32px;
+    }
+
+    .form .inputs-in-line {
+        display: block;
+    }
+
+    .form  .inputs-in-line > *:not(:last-child) {
+        margin: 0 0 20px 0;
+    }
+}

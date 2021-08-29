@@ -8,13 +8,14 @@ interface TextInputProps {
     onChange: (newVal: string) => void
     onBlur: () => void
     error?: string
+    placeholder: string
 }
 
 export function TextInput(props: TextInputProps) {
-    const {title, value, onChange, onBlur, error} = props;
+    const {title, value, onChange, onBlur, error, placeholder} = props;
     return <Titled title={title}>
         <Errorable error={error}>
-            <input className="input" value={value} onChange={e => onChange(e.target.value)} onBlur={onBlur}/>
+            <input className="input" value={value} onChange={e => onChange(e.target.value)} onBlur={onBlur} placeholder={placeholder}/>
         </Errorable>
     </Titled>;
 }

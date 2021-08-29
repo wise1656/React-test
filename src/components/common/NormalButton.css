@@ -14,3 +14,11 @@
 .normal-button.disabled {
     background-color: #DBDBDB;
 }
+
+@media screen and (max-width: 830px) {
+    .normal-button {
+        width: auto;
+        flex: 1;
+        text-align: center;
+    }
+}
